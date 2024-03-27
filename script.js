@@ -17,26 +17,26 @@ function playRound(playerSelection, computerSelection) {
     } else {
         if (ps == 'rock') {
             if (cs == 'paper') {
-                console.log("You Lose! "+ cs.charAt(0).toUpperCase() +cs.slice(1) +" beats "+ps.charAt(0).toUpperCase()+ps.slice(1));
+                resultDisplay.textContent= "You Lose! "+ cs.charAt(0).toUpperCase() +cs.slice(1) +" beats "+ps.charAt(0).toUpperCase()+ps.slice(1);
                 return -1;
             } else {
-                console.log("You Win! "+ ps.charAt(0).toUpperCase() +ps.slice(1) +" beats "+cs.charAt(0).toUpperCase()+cs.slice(1));
+                resultDisplay.textContent= "You Win! "+ ps.charAt(0).toUpperCase() +ps.slice(1) +" beats "+cs.charAt(0).toUpperCase()+cs.slice(1);
                 return 1;
             }
         } else if (ps == 'paper') {
             if (cs == 'scissors') {
-                console.log("You Lose! "+ cs.charAt(0).toUpperCase() +cs.slice(1) +" beats "+ps.charAt(0).toUpperCase()+ps.slice(1));
+                resultDisplay.textContent="You Lose! "+ cs.charAt(0).toUpperCase() +cs.slice(1) +" beats "+ps.charAt(0).toUpperCase()+ps.slice(1);
                 return -1;
             } else {
-                console.log("You Win! "+ ps.charAt(0).toUpperCase() +ps.slice(1) +" beats "+cs.charAt(0).toUpperCase()+cs.slice(1));
+                resultDisplay.textContent="You Win! "+ ps.charAt(0).toUpperCase() +ps.slice(1) +" beats "+cs.charAt(0).toUpperCase()+cs.slice(1);
                 return +1;
             }
         }else{
             if (cs == 'rock') {
-                console.log("You Lose! "+ cs.charAt(0).toUpperCase() +cs.slice(1) +" beats "+ps.charAt(0).toUpperCase()+ps.slice(1));
+                resultDisplay.textContent="You Lose! "+ cs.charAt(0).toUpperCase() +cs.slice(1) +" beats "+ps.charAt(0).toUpperCase()+ps.slice(1);
                 return 1;
             } else {
-                console.log("You Win! "+ ps.charAt(0).toUpperCase() +ps.slice(1) +" beats "+cs.charAt(0).toUpperCase()+cs.slice(1));
+                resultDisplay.textContent ="You Win! "+ ps.charAt(0).toUpperCase() +ps.slice(1) +" beats "+cs.charAt(0).toUpperCase()+cs.slice(1);
                 return +1;
             }
 
@@ -56,23 +56,49 @@ Use prompt() to get input from the user. Read the docs here if you need to.
 Feel free to re-work your previous functions if you need to. Specifically, you might want to change the return value to something more useful.
 Feel free to create more “helper” functions if you think it would be useful.
  */
-function playGame(){
-    let score =0 ;
-    for ( let i = 0 ; i < 5 ; i++){
-        // take input from console 
-        // take comps input 
-        let input = prompt("Wats your choice?");
-        let compinput = getComputerChoice();
-         score+= playRound(input,compinput);
+// function playGame(){
+//     let score =0 ;
+//     // for ( let i = 0 ; i < 5 ; i++){
+//         // take input from console 
+//         // take comps input 
+//         let input = prompt("Wats your choice?");
+//         let compinput = getComputerChoice();
+//          score+= playRound(input,compinput);
 
-    }
-    if( score >0){
-        return "You Win ";
-    }else if( score == 0){
-        return "Its  a Tie";
-    }else{
-        return "You Lose";
-    }
-}
+//     // }
+//     if( score >0){
+//         return "You Win ";
+//     }else if( score == 0){
+//         return "Its  a Tie";
+//     }else{
+//         return "You Lose";
+//     }
+// }
+var score = 0 ; 
+var count = 4;
+var button = document.querySelectorAll("button");
+button.forEach(function(b){
+    b.addEventListener('click',function(){
+        count--;
+        var computerSelection = getComputerChoice();
+        var playerSelection= b.id;
+        score += playRound(playerSelection,computerSelection);
+        if(count ==0){
+            if( score >0){
+                resultDisplay.textContent= "You Win ";
+                    }else if( score == 0){
+                        resultDisplay.textContent= "Its  a Tie";
+                    }else{
+                        resultDisplay.textContent= "You Lose";
+                    }
+              count= 5;      
+                
+        }
+    });
+});
+// add a div for displaying the results ! how do i add them ? 
+/**
+ * make a duv evry time its called 
+ */
 
 
